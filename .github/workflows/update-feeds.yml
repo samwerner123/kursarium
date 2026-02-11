@@ -1,0 +1,69 @@
+name: Auto Update Course Feeds
+
+on:
+  # Запуск каждые 6 часов
+  schedule:
+    - cron: '0 */6 * * *'  # В 00:00, 06:00, 12:00, 18:00 UTC
+  
+  # Ручной запуск через GitHub Actions UI
+  workflow_dispatch:
+  
+  # Запуск при пуше в main (для тестирования)
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/**'
+      - 'data/feeds-config.json'
+
+jobs:
+  update-feeds:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: 📦 Install dependencies
+        run: npm install
+      
+      - name: 🔄 Import feeds
+        run: npm run import-feeds
+      
+      - name: 📊 Check for changes
+        id: git-check
+        run: |
+          git diff --quiet data/ images/ || echo "changed=true" >> $GITHUB_OUTPUT
+      
+      - name: 💾 Commit and push changes
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "Feed Update Bot"
+          git add data/ images/
+          git commit -m "🤖 Auto-update feeds: $(date +'%Y-%m-%d %H:%M:%S')"
+          git push
+      
+      - name: ✅ No changes
+        if: steps.git-check.outputs.changed != 'true'
+        run: echo "No new courses found in feeds"
+      
+      - name: 📝 Summary
+        run: |
+          echo "## 📊 Feed Update Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Time:** $(date +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f data/meta.json ]; then
+            echo "**Total Courses:** $(jq -r '.totalCourses' data/meta.json)" >> $GITHUB_STEP_SUMMARY
+            echo "**Total Schools:** $(jq -r '.totalSchools' data/meta.json)" >> $GITHUB_STEP_SUMMARY
+            echo "**Total Pages:** $(jq -r '.totalPages' data/meta.json)" >> $GITHUB_STEP_SUMMARY
+          fi

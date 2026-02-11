@@ -1,0 +1,19 @@
+{
+  "name": "kursarium-aggregator",
+  "version": "1.0.0",
+  "description": "Агрегатор онлайн-курсов с автообновлением фидов",
+  "scripts": {
+    "import-feeds": "node scripts/import-feeds.js",
+    "test-import": "node scripts/import-feeds.js --test"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "xml2js": "^0.6.0",
+    "csv-parser": "^3.0.0",
+    "sharp": "^0.33.0"
+  },
+  "devDependencies": {},
+  "keywords": ["courses", "aggregator", "affiliate"],
+  "author": "",
+  "license": "MIT"
+}

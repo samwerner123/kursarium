@@ -1,0 +1,21 @@
+{
+  "feeds": [
+    {
+      "id": "contented",
+      "name": "Contented",
+      "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
+      "logoUrl": null,
+      "feedUrl": "https://feeds.advcake.ru/feed/download/6492883e1420c51cfb6c427b1cecdb61",
+      "feedFormat": "yml",
+      "affiliateParam": "",
+      "enabled": true,
+      "lastUpdate": "2026-02-11T08:03:42.380Z"
+    }
+  ],
+  "settings": {
+    "updateInterval": "0 */6 * * *",
+    "maxCoursesPerPage": 50,
+    "imageCacheDir": "images/schools",
+    "dataCacheDir": "data/courses"
+  }
+}

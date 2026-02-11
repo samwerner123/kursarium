@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kursarium — Агрегатор онлайн-курсов</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --gradient-soft: linear-gradient(135deg, #f0f0ff 0%, #e8e8ff 100%);
+            --success: #16a34a;
+            --success-bg: #dcfce7;
+            --warning: #fbbf24;
+            --orange: #f97316;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666;
+            --text-muted: #888;
+            --bg-primary: #f8f9fa;
+            --bg-white: #fff;
+            --border: #e5e5e5;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==================== HEADER ==================== */
+        .header {
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: var(--gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .logo-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav a {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav a:hover {
+            color: var(--primary);
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.2s;
+            border-radius: 2px;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .header-search {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .header-search input {
+            width: 100%;
+            padding: 10px 16px 10px 44px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            background: var(--bg-primary);
+            transition: all 0.2s;
+        }
+
+        .header-search input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--bg-white);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .header-search input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .header-search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-outline {
+            background: var(--bg-white);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            background: linear-gradient(180deg, #fff 0%, var(--bg-primary) 100%);
+            padding: 60px 0 80px;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--gradient-soft);
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+
+        .hero-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .hero-title {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .hero-title span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .hero-search {
+            max-width: 600px;
+            margin: 0 auto 24px;
+            position: relative;
+        }
+
+        .hero-search input {
+            width: 100%;
+            padding: 20px 140px 20px 56px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            font-size: 16px;
+            background: var(--bg-white);
+            box-shadow: var(--shadow-md);
+            transition: all 0.2s;
+        }
+
+        .hero-search input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg), 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .hero-search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .hero-search-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 12px 24px;
+            background: var(--gradient);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .hero-search-btn:hover {
+            transform: translateY(-50%) scale(1.02);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .hero-tag {
+            padding: 8px 16px;
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .hero-tag:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--gradient-soft);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .hero-stat-label {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* ==================== CATEGORIES ==================== */
+        .categories {
+            padding: 60px 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .section-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+            transition: gap 0.2s;
+        }
+
+        .section-link:hover {
+            gap: 10px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .category-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid transparent;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-light);
+        }
+
+        .category-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .category-icon.programming { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
+        .category-icon.design { background: linear-gradient(135deg, #fce7f3, #fbcfe8); }
+        .category-icon.marketing { background: linear-gradient(135deg, #d1fae5, #a7f3d0); }
+        .category-icon.analytics { background: linear-gradient(135deg, #fef3c7, #fde68a); }
+        .category-icon.management { background: linear-gradient(135deg, #e0e7ff, #c7d2fe); }
+        .category-icon.finance { background: linear-gradient(135deg, #dcfce7, #bbf7d0); }
+        .category-icon.languages { background: linear-gradient(135deg, #ffe4e6, #fecdd3); }
+        .category-icon.soft { background: linear-gradient(135deg, #f3e8ff, #e9d5ff); }
+
+        .category-info {
+            flex: 1;
+        }
+
+        .category-name {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .category-count {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ==================== POPULAR COURSES ==================== */
+        .courses {
+            padding: 60px 0;
+            background: var(--bg-white);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .course-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-light);
+        }
+
+        .course-image {
+            height: 140px;
+            background: var(--gradient-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 4px 10px;
+            background: var(--orange);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+        }
+
+        .course-school {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            background: rgba(255,255,255,0.95);
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .course-school-logo {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            background: var(--gradient);
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-title {
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 1.4;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .course-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .course-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .course-rating svg {
+            width: 14px;
+            height: 14px;
+            color: var(--warning);
+            fill: var(--warning);
+        }
+
+        .course-price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .course-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .course-price-old {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .course-price-discount {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--success);
+            background: var(--success-bg);
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+        }
+
+        /* ==================== SCHOOLS ==================== */
+        .schools {
+            padding: 60px 0;
+        }
+
+        .schools-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+        }
+
+        .school-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid transparent;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .school-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-light);
+        }
+
+        .school-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-md);
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .school-logo.skillbox { background: linear-gradient(135deg, #5a67d8, #6b46c1); }
+        .school-logo.geekbrains { background: linear-gradient(135deg, #48bb78, #38a169); }
+        .school-logo.netology { background: linear-gradient(135deg, #4299e1, #3182ce); }
+        .school-logo.practicum { background: linear-gradient(135deg, #f56565, #e53e3e); }
+        .school-logo.skillfactory { background: linear-gradient(135deg, #ed8936, #dd6b20); }
+        .school-logo.contented { background: linear-gradient(135deg, #9f7aea, #805ad5); }
+
+        .school-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .school-stats {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .school-stats svg {
+            width: 14px;
+            height: 14px;
+            color: var(--warning);
+            fill: var(--warning);
+        }
+
+        /* ==================== FEATURES ==================== */
+        .features {
+            padding: 80px 0;
+            background: var(--bg-white);
+        }
+
+        .features-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 48px;
+        }
+
+        .features-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .features-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 32px;
+        }
+
+        .feature-icon {
+            width: 72px;
+            height: 72px;
+            background: var(--gradient-soft);
+            border-radius: var(--radius-lg);
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon svg {
+            width: 32px;
+            height: 32px;
+            color: var(--primary);
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ==================== CTA ==================== */
+        .cta {
+            padding: 80px 0;
+            background: var(--gradient);
+        }
+
+        .cta-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #fff;
+        }
+
+        .cta-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .cta-text {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 32px;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            background: #fff;
+            color: var(--primary);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            background: #111827;
+            color: #fff;
+            padding: 64px 20px 32px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .footer-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #9ca3af;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-social {
+            width: 40px;
+            height: 40px;
+            background: #1f2937;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .footer-social:hover {
+            background: var(--primary);
+        }
+
+        .footer-social svg {
+            width: 20px;
+            height: 20px;
+            color: #9ca3af;
+        }
+
+        .footer-social:hover svg {
+            color: #fff;
+        }
+
+        .footer-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: #9ca3af;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid #374151;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #6b7280;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-bottom-links a {
+            color: #6b7280;
+            transition: color 0.2s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #9ca3af;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1024px) {
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .schools-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .header-search {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .categories-grid,
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .schools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 40px 0 60px;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-search input {
+                padding: 16px 16px 16px 48px;
+            }
+
+            .hero-search-btn {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                width: 100%;
+                margin-top: 12px;
+            }
+
+            .cta-title {
+                font-size: 28px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .category-card,
+        .course-card,
+        .school-card {
+            animation: fadeInUp 0.4s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="/" class="logo">
+                <div class="logo-icon">K</div>
+                <span class="logo-text">Kursarium</span>
+            </a>
+            <nav class="nav">
+                <a href="#">Курсы</a>
+                <a href="#">Профессии</a>
+                <a href="#">Школы</a>
+                <a href="#">Рейтинги</a>
+                <a href="#">Блог</a>
+            </nav>
+            <div class="header-search">
+                <svg class="header-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                </svg>
+                <input type="text" placeholder="Поиск курсов">
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-outline">Войти</button>
+                <button class="btn btn-primary">Регистрация</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    Агрегатор онлайн-курсов №1 в России
+                </div>
+                <h1 class="hero-title">Найдите <span>идеальный курс</span> для вашей карьеры</h1>
+                <p class="hero-subtitle">Сравнивайте цены, читайте отзывы и выбирайте лучшие образовательные программы от ведущих онлайн-школ</p>
+
+                <div class="hero-search">
+                    <svg class="hero-search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                    <input type="text" placeholder="Найти курс, профессию или навык...">
+                    <button class="hero-search-btn">Найти</button>
+                </div>
+
+                <div class="hero-tags">
+                    <span class="hero-tag">Python</span>
+                    <span class="hero-tag">Data Science</span>
+                    <span class="hero-tag">Веб-дизайн</span>
+                    <span class="hero-tag">UX/UI</span>
+                    <span class="hero-tag">Маркетинг</span>
+                    <span class="hero-tag">Аналитика</span>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">5 000+</div>
+                        <div class="hero-stat-label">Курсов</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">150+</div>
+                        <div class="hero-stat-label">Школ</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">50 000+</div>
+                        <div class="hero-stat-label">Отзывов</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Популярные направления</h2>
+                <a href="#" class="section-link">
+                    Все направления
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon programming">💻</div>
+                    <div class="category-info">
+                        <div class="category-name">Программирование</div>
+                        <div class="category-count">1 250 курсов</div>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon design">🎨</div>
+                    <div class="category-info">
+                        <div class="category-name">Дизайн</div>
+                        <div class="category-count">840 курсов</div>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon marketing">📊</div>
+                    <div class="category-info">
+                        <div class="category-name">Маркетинг</div>
+                        <div class="category-count">620 курсов</div>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon analytics">📈</div>
+                    <div class="category-info">
+                        <div class="category-name">Аналитика</div>
+                        <div class="category-count">380 курсов</div>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon management">👔</div>
+                    <div class="category-info">
+                        <div class="category-name">Менеджмент</div>
+                        <div class="category-count">290 курсов</div>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon finance">💰</div>
+                    <div class="category-info">
+                        <div class="category-name">Финансы</div>
+                        <div class="category-count">210 курсов</div>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon languages">🌍</div>
+                    <div class="category-info">
+                        <div class="category-name">Иностранные языки</div>
+                        <div class="category-count">450 курсов</div>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon soft">🤝</div>
+                    <div class="category-info">
+                        <div class="category-name">Soft Skills</div>
+                        <div class="category-count">180 курсов</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Courses -->
+    <section class="courses">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Популярные курсы</h2>
+                <a href="#" class="section-link">
+                    Все курсы
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="courses-grid">
+                <a href="#" class="course-card">
+                    <div class="course-image">
+                        <div class="course-badge">Хит</div>
+                        <div class="course-school">
+                            <div class="course-school-logo"></div>
+                            Skillbox
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Python-разработчик с нуля до PRO</h3>
+                        <div class="course-meta">
+                            <span class="course-rating">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                4.8
+                            </span>
+                            <span>•</span>
+                            <span>12 месяцев</span>
+                        </div>
+                        <div class="course-price-row">
+                            <span class="course-price">89 900 ₽</span>
+                            <span class="course-price-old">150 000 ₽</span>
+                            <span class="course-price-discount">-40%</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="course-card">
+                    <div class="course-image">
+                        <div class="course-school">
+                            <div class="course-school-logo"></div>
+                            GeekBrains
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">UX/UI дизайнер</h3>
+                        <div class="course-meta">
+                            <span class="course-rating">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                4.7
+                            </span>
+                            <span>•</span>
+                            <span>10 месяцев</span>
+                        </div>
+                        <div class="course-price-row">
+                            <span class="course-price">79 200 ₽</span>
+                            <span class="course-price-old">132 000 ₽</span>
+                            <span class="course-price-discount">-40%</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="course-card">
+                    <div class="course-image">
+                        <div class="course-badge">Новый</div>
+                        <div class="course-school">
+                            <div class="course-school-logo"></div>
+                            Нетология
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Data Scientist с нуля</h3>
+                        <div class="course-meta">
+                            <span class="course-rating">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                4.9
+                            </span>
+                            <span>•</span>
+                            <span>14 месяцев</span>
+                        </div>
+                        <div class="course-price-row">
+                            <span class="course-price">115 000 ₽</span>
+                            <span class="course-price-old">165 000 ₽</span>
+                            <span class="course-price-discount">-30%</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="course-card">
+                    <div class="course-image">
+                        <div class="course-school">
+                            <div class="course-school-logo"></div>
+                            Яндекс Практикум
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Аналитик данных</h3>
+                        <div class="course-meta">
+                            <span class="course-rating">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                4.8
+                            </span>
+                            <span>•</span>
+                            <span>6 месяцев</span>
+                        </div>
+                        <div class="course-price-row">
+                            <span class="course-price">95 000 ₽</span>
+                            <span class="course-price-old">120 000 ₽</span>
+                            <span class="course-price-discount">-21%</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schools -->
+    <section class="schools">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Топ онлайн-школы</h2>
+                <a href="#" class="section-link">
+                    Все школы
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="schools-grid">
+                <a href="#" class="school-card">
+                    <div class="school-logo skillbox">Sk</div>
+                    <div class="school-name">Skillbox</div>
+                    <div class="school-stats">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        4.7 • 892 курса
+                    </div>
+                </a>
+                <a href="#" class="school-card">
+                    <div class="school-logo geekbrains">GB</div>
+                    <div class="school-name">GeekBrains</div>
+                    <div class="school-stats">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        4.6 • 654 курса
+                    </div>
+                </a>
+                <a href="#" class="school-card">
+                    <div class="school-logo netology">N</div>
+                    <div class="school-name">Нетология</div>
+                    <div class="school-stats">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        4.8 • 420 курсов
+                    </div>
+                </a>
+                <a href="#" class="school-card">
+                    <div class="school-logo practicum">Я</div>
+                    <div class="school-name">Яндекс Практикум</div>
+                    <div class="school-stats">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        4.9 • 28 курсов
+                    </div>
+                </a>
+                <a href="#" class="school-card">
+                    <div class="school-logo skillfactory">SF</div>
+                    <div class="school-name">Skillfactory</div>
+                    <div class="school-stats">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        4.5 • 156 курсов
+                    </div>
+                </a>
+                <a href="#" class="school-card">
+                    <div class="school-logo contented">C</div>
+                    <div class="school-name">Contented</div>
+                    <div class="school-stats">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        4.7 • 89 курсов
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <div class="features-header">
+                <h2 class="features-title">Почему выбирают Kursarium</h2>
+                <p class="features-subtitle">Мы помогаем найти лучший курс для вашего развития</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Сравнение цен</h3>
+                    <p class="feature-text">Сравнивайте стоимость курсов разных школ и находите лучшие предложения со скидками</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Честные отзывы</h3>
+                    <p class="feature-text">Читайте реальные отзывы выпускников и принимайте взвешенные решения</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Удобный поиск</h3>
+                    <p class="feature-text">Фильтруйте курсы по цене, длительности, формату и уровню подготовки</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Готовы начать обучение?</h2>
+                <p class="cta-text">Найдите курс мечты среди 5000+ программ от лучших онлайн-школ</p>
+                <a href="#" class="cta-btn">
+                    Подобрать курс
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">
+                        <div class="footer-logo-icon">K</div>
+                        Kursarium
+                    </div>
+                    <p class="footer-text">
+                        Агрегатор онлайн-курсов №1 в России. Сравнивайте цены, читайте отзывы и выбирайте лучшие образовательные программы.
+                    </p>
+                    <div class="footer-socials">
+                        <a href="#" class="footer-social">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.05-.2-.06-.05-.15-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="footer-social">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="footer-social">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.862-.523-2.049-1.719-1.033-1.006-1.489-1.141-1.744-1.141-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4.03 8.57 4.03 8.096c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.677.863 2.49 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.44-.407h2.744c.372 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.254-1.406 2.151-3.574 2.151-3.574.119-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.049.17.475-.085.72-.576.72z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <div class="footer-title">Курсы</div>
+                    <ul class="footer-links">
+                        <li><a href="#">Программирование</a></li>
+                        <li><a href="#">Дизайн</a></li>
+                        <li><a href="#">Маркетинг</a></li>
+                        <li><a href="#">Аналитика</a></li>
+                        <li><a href="#">Менеджмент</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-title">Школы</div>
+                    <ul class="footer-links">
+                        <li><a href="#">Skillbox</a></li>
+                        <li><a href="#">GeekBrains</a></li>
+                        <li><a href="#">Нетология</a></li>
+                        <li><a href="#">Яндекс Практикум</a></li>
+                        <li><a href="#">Skillfactory</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-title">Рейтинги</div>
+                    <ul class="footer-links">
+                        <li><a href="#">Лучшие курсы 2024</a></li>
+                        <li><a href="#">Рейтинг школ</a></li>
+                        <li><a href="#">Бесплатные курсы</a></li>
+                        <li><a href="#">Курсы с трудоустройством</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-title">Компания</div>
+                    <ul class="footer-links">
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Контакты</a></li>
+                        <li><a href="#">Блог</a></li>
+                        <li><a href="#">Реклама</a></li>
+                        <li><a href="#">Партнёрам</a></li>
+                        <li><a href="admin.html">Админ-панель</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 Kursarium. Все права защищены.</span>
+                <div class="footer-bottom-links">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Пользовательское соглашение</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Загрузка курсов из JSON -->
+    <script src="js/courses.js"></script>
+</body>
+</html>
