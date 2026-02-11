@@ -491,10 +491,10 @@
 
         <div id="alertContainer"></div>
 
-        <!-- Импорт фидов -->
+        <!-- Генератор конфигурации фида -->
         <div class="admin-section">
-            <h2 class="section-title">Импорт партнерского фида</h2>
-            <p class="section-description">Импортируйте курсы из партнерского фида (XML, CSV, JSON)</p>
+            <h2 class="section-title">🚀 Добавить новый фид</h2>
+            <p class="section-description">Заполни форму и получи готовую конфигурацию для добавления в feeds-config.json</p>
 
             <form id="feedForm">
                 <div class="form-group">
@@ -558,21 +558,68 @@
                 <div class="btn-group">
                     <button type="submit" class="btn btn-primary">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
+                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                         </svg>
-                        Импортировать фид
+                        Сгенерировать JSON
                     </button>
-                    <button type="button" class="btn btn-secondary" id="previewBtn">
+                    <button type="button" class="btn btn-secondary" id="clearBtn">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                            <circle cx="12" cy="12" r="3"/>
+                            <polyline points="3 6 5 6 21 6"/>
+                            <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
                         </svg>
-                        Предпросмотр
+                        Очистить
                     </button>
                 </div>
             </form>
+        </div>
+
+        <!-- Результат генерации JSON -->
+        <div class="admin-section" id="jsonResult" style="display: none;">
+            <h2 class="section-title">✅ JSON конфигурация готова!</h2>
+            <p class="section-description">Скопируй этот код и добавь в файл data/feeds-config.json</p>
+            
+            <div style="position: relative;">
+                <textarea id="jsonOutput" readonly style="width: 100%; min-height: 300px; font-family: 'Courier New', monospace; font-size: 13px; padding: 16px; border: 2px solid var(--primary); border-radius: var(--radius-md); background: #f8f9fa;"></textarea>
+                <button type="button" class="btn btn-primary" id="copyJsonBtn" style="position: absolute; top: 16px; right: 16px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                    </svg>
+                    Скопировать
+                </button>
+            </div>
+
+            <div style="margin-top: 24px; padding: 20px; background: #fff3cd; border: 1px solid #ffc107; border-radius: var(--radius-md);">
+                <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 12px; color: #856404;">📝 Инструкция:</h3>
+                <ol style="margin-left: 20px; color: #856404; line-height: 1.8;">
+                    <li>Нажми <strong>"Скопировать"</strong> выше</li>
+                    <li>Открой файл <code style="background: #fff; padding: 2px 6px; border-radius: 4px;">data/feeds-config.json</code></li>
+                    <li>Найди раздел <code style="background: #fff; padding: 2px 6px; border-radius: 4px;">"feeds": [</code></li>
+                    <li>Добавь <strong>запятую</strong> после последнего фида</li>
+                    <li>Вставь скопированный код</li>
+                    <li>Сохрани файл</li>
+                    <li>Запусти в PowerShell: <code style="background: #fff; padding: 2px 6px; border-radius: 4px;">npm run import-feeds</code></li>
+                    <li>Загрузи на GitHub: <code style="background: #fff; padding: 2px 6px; border-radius: 4px;">git add . && git commit -m "Добавлен новый фид" && git push</code></li>
+                </ol>
+            </div>
+
+            <div style="margin-top: 16px; display: flex; gap: 12px;">
+                <button type="button" class="btn btn-primary" id="addAnotherBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                    Добавить еще фид
+                </button>
+                <button type="button" class="btn btn-secondary" id="downloadJsonBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Скачать JSON файл
+                </button>
+            </div>
         </div>
 
         <!-- Список импортированных курсов -->
@@ -672,8 +719,10 @@
             return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
         }
 
-        // Обработка формы
+        // Обработка формы - генерация JSON
         const feedForm = document.getElementById('feedForm');
+        const jsonResult = document.getElementById('jsonResult');
+        const jsonOutput = document.getElementById('jsonOutput');
         const coursesList = document.getElementById('coursesList');
         let courses = JSON.parse(localStorage.getItem('kursarium_courses') || '[]');
 
@@ -685,60 +734,47 @@
             const feedFormat = document.getElementById('feedFormat').value;
             const affiliateParam = document.getElementById('affiliateParam').value;
 
-            if (!uploadedLogo) {
-                showAlert('Пожалуйста, загрузите логотип школы', 'danger');
+            if (!schoolName || !feedUrl) {
+                showAlert('Заполните обязательные поля: Название школы и URL фида', 'danger');
                 return;
             }
 
-            // Симуляция импорта
-            showAlert('Импорт фида... Пожалуйста, подождите', 'success');
+            // Генерируем ID из названия школы
+            const schoolId = schoolName.toLowerCase()
+                .replace(/[^a-zа-яё0-9]/g, '')
+                .substring(0, 20);
 
-            setTimeout(() => {
-                // Сохраняем логотип в base64 для демонстрации
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const logoData = e.target.result;
+            // Определяем URL логотипа
+            let logoUrl = 'images/schools/' + schoolId + '.png';
+            if (uploadedLogo) {
+                // Если загружен файл - используем временный URL
+                logoUrl = 'УКАЖИ_ССЫЛКУ_НА_ЛОГОТИП_ИЛИ_ЗАГРУЗИ_ФАЙЛ_В_images/schools/' + schoolId + '.png';
+            }
 
-                    // Добавляем несколько тестовых курсов
-                    const newCourses = [
-                        {
-                            id: Date.now() + 1,
-                            name: 'Python-разработчик с нуля',
-                            school: schoolName,
-                            logo: logoData,
-                            price: '89 900 ₽',
-                            url: feedUrl + (affiliateParam || '')
-                        },
-                        {
-                            id: Date.now() + 2,
-                            name: 'Веб-разработчик',
-                            school: schoolName,
-                            logo: logoData,
-                            price: '79 900 ₽',
-                            url: feedUrl + (affiliateParam || '')
-                        },
-                        {
-                            id: Date.now() + 3,
-                            name: 'Data Scientist',
-                            school: schoolName,
-                            logo: logoData,
-                            price: '115 000 ₽',
-                            url: feedUrl + (affiliateParam || '')
-                        }
-                    ];
+            // Генерируем JSON конфигурацию
+            const feedConfig = {
+                id: schoolId,
+                name: schoolName,
+                logo: logoUrl,
+                logoUrl: null,
+                feedUrl: feedUrl,
+                feedFormat: feedFormat,
+                affiliateParam: affiliateParam || '',
+                enabled: true,
+                lastUpdate: null
+            };
 
-                    courses = [...courses, ...newCourses];
-                    localStorage.setItem('kursarium_courses', JSON.stringify(courses));
+            // Форматируем JSON с отступами
+            const jsonText = JSON.stringify(feedConfig, null, 2);
+            
+            // Показываем результат
+            jsonOutput.value = jsonText;
+            jsonResult.style.display = 'block';
+            
+            // Скроллим к результату
+            jsonResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-                    showAlert(`Успешно импортировано ${newCourses.length} курсов из ${schoolName}!`, 'success');
-                    renderCourses();
-                    updateStats();
-                    feedForm.reset();
-                    logoPreview.classList.remove('active');
-                    uploadedLogo = null;
-                };
-                reader.readAsDataURL(uploadedLogo);
-            }, 2000);
+            showAlert('JSON конфигурация сгенерирована! Скопируй и добавь в feeds-config.json', 'success');
         });
 
         function renderCourses() {
@@ -796,17 +832,53 @@
             }, 5000);
         }
 
-        // Предпросмотр
-        document.getElementById('previewBtn').addEventListener('click', () => {
-            const schoolName = document.getElementById('schoolName').value;
-            const feedUrl = document.getElementById('feedUrl').value;
+        // Кнопка "Скопировать JSON"
+        document.getElementById('copyJsonBtn').addEventListener('click', () => {
+            const jsonText = jsonOutput.value;
+            navigator.clipboard.writeText(jsonText).then(() => {
+                showAlert('✅ JSON скопирован в буфер обмена!', 'success');
+            }).catch(err => {
+                // Fallback для старых браузеров
+                jsonOutput.select();
+                document.execCommand('copy');
+                showAlert('✅ JSON скопирован в буфер обмена!', 'success');
+            });
+        });
 
-            if (!schoolName || !feedUrl) {
-                showAlert('Заполните название школы и URL фида', 'danger');
-                return;
+        // Кнопка "Добавить еще фид"
+        document.getElementById('addAnotherBtn').addEventListener('click', () => {
+            feedForm.reset();
+            logoPreview.classList.remove('active');
+            uploadedLogo = null;
+            jsonResult.style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            showAlert('Форма очищена. Добавь новый фид!', 'success');
+        });
+
+        // Кнопка "Скачать JSON файл"
+        document.getElementById('downloadJsonBtn').addEventListener('click', () => {
+            const jsonText = jsonOutput.value;
+            const blob = new Blob([jsonText], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'feed-config.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showAlert('✅ JSON файл скачан!', 'success');
+        });
+
+        // Кнопка "Очистить"
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            if (confirm('Очистить форму?')) {
+                feedForm.reset();
+                logoPreview.classList.remove('active');
+                uploadedLogo = null;
+                jsonResult.style.display = 'none';
+                showAlert('Форма очищена', 'success');
             }
-
-            showAlert(`Предпросмотр: Школа "${schoolName}", Фид: ${feedUrl}`, 'success');
         });
 
         // Инициализация
