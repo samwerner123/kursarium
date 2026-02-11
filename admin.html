@@ -457,6 +457,65 @@
                 justify-content: center;
             }
         }
+
+        /* Tabs */
+        .tab-btn {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .github-feeds-list {
+            margin-top: 24px;
+        }
+
+        .github-feed-item {
+            padding: 16px;
+            background: var(--bg-primary);
+            border-radius: var(--radius-sm);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .github-feed-info {
+            flex: 1;
+        }
+
+        .github-feed-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .github-feed-url {
+            font-size: 13px;
+            color: var(--text-secondary);
+            word-break: break-all;
+        }
     </style>
 </head>
 <body>
@@ -473,6 +532,12 @@
     <div class="admin-container">
         <h1 class="admin-title">Админ-панель</h1>
         <p class="admin-subtitle">Управление курсами и партнерскими фидами</p>
+        
+        <!-- Tabs -->
+        <div style="display: flex; gap: 12px; margin-bottom: 40px; border-bottom: 2px solid var(--border);">
+            <button class="tab-btn active" onclick="switchTab('local')">📝 Локальный режим</button>
+            <button class="tab-btn" onclick="switchTab('github')">🔗 GitHub режим</button>
+        </div>
 
         <div class="stats-grid">
             <div class="stat-card">
@@ -491,6 +556,9 @@
 
         <div id="alertContainer"></div>
 
+        <!-- Local Mode Content -->
+        <div id="localMode" class="tab-content active">
+        
         <!-- Генератор конфигурации фида -->
         <div class="admin-section">
             <h2 class="section-title">🚀 Добавить новый фид</h2>
@@ -633,6 +701,76 @@
                 </p>
             </div>
         </div>
+        
+        </div>
+        <!-- End Local Mode -->
+
+        <!-- GitHub Mode Content -->
+        <div id="githubMode" class="tab-content">
+            
+            <!-- GitHub Connection -->
+            <div class="admin-section" id="githubConnect">
+                <h2 class="section-title">🔐 Подключение к GitHub</h2>
+                <p class="section-description">Подключись к GitHub чтобы редактировать фиды прямо в браузере</p>
+                
+                <div class="form-group">
+                    <label class="form-label">GitHub Personal Access Token</label>
+                    <input type="password" id="githubToken" class="form-input" placeholder="ghp_xxxxxxxxxxxxxxxx">
+                    <p class="form-help">
+                        <a href="https://github.com/settings/tokens/new?scopes=repo,workflow&description=Kursarium+Admin" target="_blank" style="color: var(--primary);">
+                            Создать токен →
+                        </a> (права: repo, workflow) | 
+                        <a href="GITHUB-TOKEN.md" target="_blank" style="color: var(--primary);">Инструкция</a>
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" id="githubUsername" class="form-input" value="samwerner123">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Repository</label>
+                    <input type="text" id="githubRepo" class="form-input" value="kursarium">
+                </div>
+
+                <button class="btn btn-primary" id="connectGithubBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                    </svg>
+                    Подключиться
+                </button>
+            </div>
+
+            <!-- GitHub Feeds Management -->
+            <div class="admin-section" id="githubFeeds" style="display: none;">
+                <h2 class="section-title">📚 Управление фидами через GitHub</h2>
+                <p class="section-description">Редактируй фиды - изменения сохраняются в GitHub и автоматически запускают импорт</p>
+
+                <div class="github-feeds-list" id="githubFeedsList">
+                    <p style="text-align: center; padding: 40px 0; color: var(--text-muted);">Загрузка фидов...</p>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="addGithubFeedBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Добавить фид
+                    </button>
+                    <button class="btn btn-primary" id="saveGithubBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/>
+                            <polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>
+                        </svg>
+                        Сохранить и запустить импорт
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <!-- End GitHub Mode -->
+
     </div>
 
     <script>
@@ -884,6 +1022,216 @@
         // Инициализация
         renderCourses();
         updateStats();
+
+        // ==================== GITHUB MODE ====================
+        
+        let githubConfig = {
+            token: localStorage.getItem('github_token') || '',
+            username: localStorage.getItem('github_username') || 'samwerner123',
+            repo: localStorage.getItem('github_repo') || 'kursarium'
+        };
+        let githubFeedsData = { feeds: [], settings: {} };
+
+        // Switch tabs
+        window.switchTab = function(mode) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide content
+            document.getElementById('localMode').classList.remove('active');
+            document.getElementById('githubMode').classList.remove('active');
+            
+            if (mode === 'local') {
+                document.getElementById('localMode').classList.add('active');
+            } else {
+                document.getElementById('githubMode').classList.add('active');
+                // Auto-connect if token exists
+                if (githubConfig.token) {
+                    loadGithubFeeds();
+                }
+            }
+        };
+
+        // Connect to GitHub
+        document.getElementById('connectGithubBtn').addEventListener('click', async () => {
+            const token = document.getElementById('githubToken').value;
+            const username = document.getElementById('githubUsername').value;
+            const repo = document.getElementById('githubRepo').value;
+
+            if (!token || !username || !repo) {
+                showAlert('Заполните все поля!', 'danger');
+                return;
+            }
+
+            githubConfig = { token, username, repo };
+            localStorage.setItem('github_token', token);
+            localStorage.setItem('github_username', username);
+            localStorage.setItem('github_repo', repo);
+
+            await loadGithubFeeds();
+        });
+
+        // Load feeds from GitHub
+        async function loadGithubFeeds() {
+            try {
+                const url = `https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/data/feeds-config.json`;
+                const response = await fetch(url, {
+                    headers: {
+                        'Authorization': `token ${githubConfig.token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Не удалось загрузить feeds-config.json');
+                }
+
+                const data = await response.json();
+                const content = atob(data.content);
+                githubFeedsData = JSON.parse(content);
+                githubFeedsData.sha = data.sha;
+
+                document.getElementById('githubConnect').style.display = 'none';
+                document.getElementById('githubFeeds').style.display = 'block';
+                renderGithubFeeds();
+                showAlert('✅ Подключено к GitHub! Фиды загружены.', 'success');
+            } catch (error) {
+                showAlert('❌ Ошибка: ' + error.message, 'danger');
+            }
+        }
+
+        // Render GitHub feeds
+        function renderGithubFeeds() {
+            const list = document.getElementById('githubFeedsList');
+            list.innerHTML = '';
+            
+            githubFeedsData.feeds.forEach((feed, index) => {
+                const item = document.createElement('div');
+                item.className = 'github-feed-item';
+                item.innerHTML = `
+                    <div class="github-feed-info">
+                        <div class="github-feed-name">${feed.name}</div>
+                        <div class="github-feed-url">${feed.feedUrl}</div>
+                        <span class="status-badge ${feed.enabled ? 'status-enabled' : 'status-disabled'}" style="display: inline-block; margin-top: 8px;">
+                            ${feed.enabled ? '✓ Включен' : '✗ Отключен'}
+                        </span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="btn btn-secondary btn-sm" onclick="editGithubFeed(${index})">Изменить</button>
+                        <button class="btn ${feed.enabled ? 'btn-secondary' : 'btn-primary'} btn-sm" onclick="toggleGithubFeed(${index})">
+                            ${feed.enabled ? 'Отключить' : 'Включить'}
+                        </button>
+                        <button class="btn btn-secondary btn-sm" onclick="deleteGithubFeed(${index})">Удалить</button>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        // Toggle feed
+        window.toggleGithubFeed = function(index) {
+            githubFeedsData.feeds[index].enabled = !githubFeedsData.feeds[index].enabled;
+            renderGithubFeeds();
+        };
+
+        // Delete feed
+        window.deleteGithubFeed = function(index) {
+            if (confirm(`Удалить фид "${githubFeedsData.feeds[index].name}"?`)) {
+                githubFeedsData.feeds.splice(index, 1);
+                renderGithubFeeds();
+            }
+        };
+
+        // Edit feed
+        window.editGithubFeed = function(index) {
+            const feed = githubFeedsData.feeds[index];
+            const newName = prompt('Название школы:', feed.name);
+            const newUrl = prompt('URL фида:', feed.feedUrl);
+            const newParam = prompt('Партнерский параметр:', feed.affiliateParam);
+            
+            if (newName !== null && newName !== '') feed.name = newName;
+            if (newUrl !== null && newUrl !== '') feed.feedUrl = newUrl;
+            if (newParam !== null) feed.affiliateParam = newParam;
+            
+            renderGithubFeeds();
+        };
+
+        // Add new feed
+        document.getElementById('addGithubFeedBtn').addEventListener('click', () => {
+            const name = prompt('Название школы:');
+            if (!name) return;
+            
+            const feedUrl = prompt('URL фида:');
+            if (!feedUrl) return;
+            
+            const format = prompt('Формат (xml/json/csv/yml):', 'xml');
+            const affiliateParam = prompt('Партнерский параметр (опционально):');
+            
+            const newFeed = {
+                id: name.toLowerCase().replace(/[^a-z0-9]/g, '').substring(0, 20),
+                name: name,
+                logo: `images/schools/${name.toLowerCase().replace(/[^a-z0-9]/g, '')}.png`,
+                logoUrl: null,
+                feedUrl: feedUrl,
+                feedFormat: format || 'xml',
+                affiliateParam: affiliateParam || '',
+                enabled: true,
+                lastUpdate: null
+            };
+            
+            githubFeedsData.feeds.push(newFeed);
+            renderGithubFeeds();
+            showAlert('Фид добавлен! Нажми "Сохранить" чтобы применить изменения.', 'success');
+        });
+
+        // Save to GitHub
+        document.getElementById('saveGithubBtn').addEventListener('click', async () => {
+            if (!confirm('Сохранить изменения в GitHub и запустить импорт?')) return;
+            
+            try {
+                // Remove sha before saving
+                const dataToSave = {
+                    feeds: githubFeedsData.feeds,
+                    settings: githubFeedsData.settings
+                };
+                
+                const content = JSON.stringify(dataToSave, null, 2);
+                const encodedContent = btoa(unescape(encodeURIComponent(content)));
+
+                const url = `https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/data/feeds-config.json`;
+                const response = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubConfig.token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: '🤖 Update feeds from admin panel',
+                        content: encodedContent,
+                        sha: githubFeedsData.sha
+                    })
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.message || 'Не удалось сохранить');
+                }
+
+                showAlert('✅ Изменения сохранены! GitHub Actions запустит импорт автоматически.', 'success');
+                await loadGithubFeeds();
+            } catch (error) {
+                showAlert('❌ Ошибка: ' + error.message, 'danger');
+            }
+        });
+
+        // Auto-load on init
+        if (githubConfig.token) {
+            document.getElementById('githubToken').value = githubConfig.token;
+            document.getElementById('githubUsername').value = githubConfig.username;
+            document.getElementById('githubRepo').value = githubConfig.repo;
+        }
     </script>
 </body>
 </html>
