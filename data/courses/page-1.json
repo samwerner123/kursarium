@@ -4,8 +4,8 @@
     "name": "Профессия «3D Artist»",
     "description": "",
     "url": "https://go.2038.pro/6300b86a01ed1190?dl=https%3A%2F%2Fcontented.ru%2Fedu%2F3d-artist&m=4&erid=LdtCKHL5u",
-    "price": "203034 ₽",
-    "oldPrice": "369153 ₽",
+    "price": "203040 ₽",
+    "oldPrice": "369144 ₽",
     "discount": "45",
     "duration": "",
     "rating": 0,
@@ -14,7 +14,7 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "ADPHOTO",
@@ -31,7 +31,7 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "DESSYS",
@@ -48,7 +48,7 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "GRAPH",
@@ -65,7 +65,7 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "GRAPHPRO",
@@ -82,15 +82,15 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "INTNEW",
     "name": "Профессия «Дизайнер интерьеров»",
     "description": "",
     "url": "https://go.2038.pro/6300b86a01ed1190?dl=https%3A%2F%2Fcontented.ru%2Fedu%2Finterior-design&m=4&erid=LdtCKHL5u",
-    "price": "142497 ₽",
-    "oldPrice": "259086 ₽",
+    "price": "142488 ₽",
+    "oldPrice": "259092 ₽",
     "discount": "45",
     "duration": "",
     "rating": 0,
@@ -99,7 +99,7 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "INTPRO",
@@ -107,7 +107,7 @@
     "description": "",
     "url": "https://go.2038.pro/6300b86a01ed1190?dl=https%3A%2F%2Fcontented.ru%2Fedu%2Finterior-designer-pro&m=4&erid=LdtCKHL5u",
     "price": "219204 ₽",
-    "oldPrice": "398552 ₽",
+    "oldPrice": "398556 ₽",
     "discount": "45",
     "duration": "",
     "rating": 0,
@@ -116,15 +116,15 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "MOTION",
     "name": "Профессия Моушн-дизайнер в 2D и 3D",
     "description": "",
     "url": "https://go.2038.pro/6300b86a01ed1190?dl=https%3A%2F%2Fcontented.ru%2Fedu%2Fmotion-3d-designer%2F&m=4&erid=LdtCKHL5u",
-    "price": "134906 ₽",
-    "oldPrice": "245284 ₽",
+    "price": "134892 ₽",
+    "oldPrice": "245268 ₽",
     "discount": "45",
     "duration": "",
     "rating": 0,
@@ -133,14 +133,14 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "MOTIONPRO",
     "name": "Профессия Моушн-дизайнер c нуля до PRO",
     "description": "",
     "url": "https://go.2038.pro/6300b86a01ed1190?dl=https%3A%2F%2Fcontented.ru%2Fedu%2Fmotion-designer-pro&m=4&erid=LdtCKHL5u",
-    "price": "216473 ₽",
+    "price": "216468 ₽",
     "oldPrice": "393588 ₽",
     "discount": "45",
     "duration": "",
@@ -150,7 +150,7 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "UXS-NEW",
@@ -158,7 +158,7 @@
     "description": "",
     "url": "https://go.2038.pro/6300b86a01ed1190?dl=https%3A%2F%2Fcontented.ru%2Fedu%2Fux-ui-designer&m=4&erid=LdtCKHL5u",
     "price": "130500 ₽",
-    "oldPrice": "237272 ₽",
+    "oldPrice": "237276 ₽",
     "discount": "45",
     "duration": "",
     "rating": 0,
@@ -167,14 +167,14 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "WBDS2",
     "name": "Профессия Веб-дизайнер",
     "description": "",
     "url": "https://go.2038.pro/6300b86a01ed1190?dl=https%3A%2F%2Fcontented.ru%2Fedu%2Fweb-designer%2F&m=4&erid=LdtCKHL5u",
-    "price": "120404 ₽",
+    "price": "120420 ₽",
     "oldPrice": "218916 ₽",
     "discount": "45",
     "duration": "",
@@ -184,15 +184,15 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "STARD",
     "name": "Старт в дизайне",
     "description": "",
     "url": "https://go.2038.pro/6300b86a01ed1190?dl=https%3A%2F%2Fcontented.ru%2Fedu%2Fdesign-start-proforientacia&m=4&erid=LdtCKHL5u",
-    "price": "201765 ₽",
-    "oldPrice": "366845 ₽",
+    "price": "201780 ₽",
+    "oldPrice": "366840 ₽",
     "discount": "45",
     "duration": "",
     "rating": 0,
@@ -201,7 +201,7 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "PHSH",
@@ -218,16 +218,16 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "AE",
     "name": "Курс After Effects",
     "description": "",
     "url": "https://go.2038.pro/6300b86a01ed1190?dl=https%3A%2F%2Fcontented.ru%2Fedu%2Fafter-effects%2F&m=4&erid=LdtCKHL5u",
-    "price": "30600 ₽",
+    "price": "28050 ₽",
     "oldPrice": "51000 ₽",
-    "discount": "40",
+    "discount": "45",
     "duration": "",
     "rating": 0,
     "category": "1",
@@ -235,16 +235,16 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "BLEND",
     "name": "Курс Blender",
     "description": "",
     "url": "https://go.2038.pro/6300b86a01ed1190?dl=https%3A%2F%2Fcontented.ru%2Fedu%2Fblender-3d&m=4&erid=LdtCKHL5u",
-    "price": "36108 ₽",
+    "price": "33099 ₽",
     "oldPrice": "60180 ₽",
-    "discount": "40",
+    "discount": "45",
     "duration": "",
     "rating": 0,
     "category": "1",
@@ -252,16 +252,16 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "C4D",
     "name": "Курс Cinema 4D",
     "description": "",
     "url": "https://go.2038.pro/6300b86a01ed1190?dl=https%3A%2F%2Fcontented.ru%2Fedu%2Fcinema4d&m=4&erid=LdtCKHL5u",
-    "price": "30600 ₽",
+    "price": "28050 ₽",
     "oldPrice": "51000 ₽",
-    "discount": "40",
+    "discount": "45",
     "duration": "",
     "rating": 0,
     "category": "1",
@@ -269,7 +269,7 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "FGM",
@@ -286,7 +286,7 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "ILLUST",
@@ -303,7 +303,7 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "INDES",
@@ -320,15 +320,15 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "KOMIL",
     "name": "Профессия коммерческий иллюстратор",
     "description": "",
     "url": "https://go.2038.pro/6300b86a01ed1190?dl=https%3A%2F%2Fcontented.ru%2Fedu%2Fcom-illustrator&m=4&erid=LdtCKHL5u",
-    "price": "115784 ₽",
-    "oldPrice": "210516 ₽",
+    "price": "115776 ₽",
+    "oldPrice": "210528 ₽",
     "discount": "45",
     "duration": "",
     "rating": 0,
@@ -337,16 +337,16 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "UXSPRO",
     "name": "Профессия UX/UI-дизайнер с нуля до PRO",
     "description": "",
     "url": "https://go.2038.pro/6300b86a01ed1190?dl=https%3A%2F%2Fcontented.ru%2Fedu%2Fux-ui-designer-pro%2F&m=4&erid=LdtCKHL5u",
-    "price": "179607 ₽",
-    "oldPrice": "359213 ₽",
-    "discount": "50",
+    "price": "197568 ₽",
+    "oldPrice": "359208 ₽",
+    "discount": "45",
     "duration": "",
     "rating": 0,
     "category": "1",
@@ -354,32 +354,15 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
-  },
-  {
-    "id": "GRAPHINTCD",
-    "name": "Интенсив по графическому дизайну",
-    "description": "",
-    "url": "https://go.2038.pro/6300b86a01ed1190?dl=https%3A%2F%2Fcontented.ru%2Fedu%2Fgraphic-designer-intentsive&m=4&erid=LdtCKHL5u",
-    "price": "140105 ₽",
-    "oldPrice": "254736 ₽",
-    "discount": "45",
-    "duration": "",
-    "rating": 0,
-    "category": "1",
-    "image": "https://storage.yandexcloud.net/sf-wallaper-bucket/CD_cpa/GRAPHINTCD.png",
-    "school": "Contented",
-    "schoolId": "contented",
-    "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "FILMED",
     "name": "Профессия Режиссёр монтажа",
     "description": "",
     "url": "https://go.2038.pro/6300b86a01ed1190?dl=https%3A%2F%2Fcontented.ru%2Fedu%2Fvideo-editor-producer&m=4&erid=LdtCKHL5u",
-    "price": "1136071 ₽",
-    "oldPrice": "247401 ₽",
+    "price": "1136080 ₽",
+    "oldPrice": "247392 ₽",
     "discount": null,
     "duration": "",
     "rating": 0,
@@ -388,15 +371,15 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "DESGAME",
     "name": "Профессия  «Геймдизайнер»",
     "description": "",
     "url": "https://go.2038.pro/6300b86a01ed1190?dl=https%3A%2F%2Fcontented.ru%2Fedu%2Fgame-designer&m=4&erid=LdtCKHL5u",
-    "price": "144225 ₽",
-    "oldPrice": "262228 ₽",
+    "price": "144216 ₽",
+    "oldPrice": "262224 ₽",
     "discount": "45",
     "duration": "",
     "rating": 0,
@@ -405,7 +388,7 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "NEUROCD",
@@ -422,7 +405,7 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   },
   {
     "id": "INGAMEDES",
@@ -439,6 +422,6 @@
     "school": "Contented",
     "schoolId": "contented",
     "logo": "https://static.tildacdn.com/tild6437-3465-4235-a134-333631363066/Group_427319740.svg",
-    "importDate": "2026-02-14T02:00:07.546Z"
+    "importDate": "2026-02-14T06:43:53.113Z"
   }
 ]
